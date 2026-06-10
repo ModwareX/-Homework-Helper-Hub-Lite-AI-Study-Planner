@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  font-family: "Jetbrains Mono", monospace;
+  background-color: #f4f6f8;
+}
+
+.app {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #222;
+}
+
+p {
+  color: #555;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+input,
+select,
+button {
+  font-family: "Jetbrains Mono", monospace;
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+button {
+  font-family: "Jetbrains Mono", monospace;
+  background-color: #25eb50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  font-family: "Jetbrains Mono", monospace;
+  background-color: #00ff0d;
+}
