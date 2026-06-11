@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+
+    if (savedTasks) {
+      return JSON.parse(savedTasks);
+    }
+
+  return [];
+});
+
+useEffect(() => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}, [tasks]);
+
 
   const [course, setCourse] = useState("");
   const [title, setTitle] = useState("");
@@ -17,9 +30,11 @@ function App() {
       course: course,
       title: title,
       type: type,
-      dueDate: dueDate,
+     dueDate: dueDate,
       difficulty: difficulty,
       estimatedHours: estimatedHours,
+     status: "Pending",
+     
     };
 
     setTasks([...tasks, newTask]);
@@ -31,7 +46,48 @@ function App() {
     setDifficulty("Easy");
     setEstimatedHours("");
   }
+  const [studyPlan, setStudyPlan] = useState("");
 
+  async function generateStudyPlan() {
+  const pendingTasks = tasks.filter((task) => task.status !== "Complete");
+
+  if (pendingTasks.length === 0) {
+    setStudyPlan("No pending tasks to plan.");
+    return;
+  }
+
+  setStudyPlan("Generating study plan...");
+
+  const response = await fetch("/api/generate-plan", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ tasks: pendingTasks }),
+  });
+
+  const data = await response.json();
+
+  setStudyPlan(data.plan);
+}
+  function deleteTask(id) {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+  }
+  function completeTask(id) {
+   const updatedTasks = tasks.map((task) => {
+    if (task.id === id) {
+      return {
+        ...task,
+        status: "Complete",
+      };
+    }
+
+    return task;
+  });
+
+  setTasks(updatedTasks);
+  }
   return (
     <div className="app">
       <h1>Homework Helper Hub Lite</h1>
@@ -96,19 +152,33 @@ function App() {
         ) : (
           <ul>
             {tasks.map((task) => (
-              <li key={task.id}>
-                <strong>{task.course}</strong> - {task.title} | {task.type} | Due:{" "}
-                {task.dueDate} | Difficulty: {task.difficulty} | Hours:{" "}
-                {task.estimatedHours}
-              </li>
-            ))}
+  <li key={task.id}>
+    <strong>{task.course}</strong> - {task.title} | {task.type} | Due:{" "}
+    {task.dueDate} | Difficulty: {task.difficulty} | Hours:{" "}
+    {task.estimatedHours} Status: {task.status}
+
+    <button onClick={() => deleteTask(task.id)}>
+      Delete
+    </button>
+    <button onClick={() => completeTask(task.id)}>
+      Complete
+    </button>
+  </li>
+))}
           </ul>
         )}
       </section>
 
       <section className="card">
         <h2>Weekly Study Plan</h2>
-        <p>Your study plan will appear here.</p>
+
+       <button onClick={generateStudyPlan}>
+         Generate AI Study Plan
+        </button>
+
+      <pre className="study-plan">
+        {studyPlan || "Your study plan will appear here."}
+       </pre>
       </section>
     </div>
   );
