@@ -50,3 +50,4 @@ Return a clear day-by-day study plan.
     res.status(500).json({ error: "Could not generate a study plan." });
   }
 }
+/* 99% cooked code this might not work and fix prompt for Claude*/

@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: "Jetbrains Mono", monospace;
+  font-family: "Spectral", serif;
   background-color: #f4f6f8;
   color: #333;
 }
@@ -40,7 +40,7 @@ h1 {
   font-size: 14px;
 }
 
-/* Form + availability layout */
+/* input area for asgnmnts and thetime avalible thingy */
 .form-grid,
 .availability-grid {
   display: grid;
@@ -59,7 +59,7 @@ label {
 
 input,
 select {
-  font-family: "Jetbrains Mono", monospace;
+  font-family: "Spectral", serif;
   width: 100%;
   padding: 10px;
   font-size: 15px;
@@ -75,9 +75,9 @@ select:focus {
   border-color: #25eb50;
 }
 
-/* Buttons */
+/* btns when adding */
 button {
-  font-family: "Jetbrains Mono", monospace;
+  font-family: "Spectral", serif;
   font-size: 15px;
   padding: 10px 16px;
   border: none;
@@ -86,7 +86,7 @@ button {
 }
 
 button:disabled {
-  opacity: 0.6;
+  opacity: 0.67; /* 67 joke in the .css????? */
   cursor: not-allowed;
 }
 
@@ -94,7 +94,7 @@ button:disabled {
   display: block;
   width: 100%;
   margin-top: 16px;
-  background-color: #25eb50;
+  background-color: #36ff61;/*kinda neon but dont change unless changing all buttons with green*/
   color: white;
   font-weight: bold;
 }
@@ -103,7 +103,7 @@ button:disabled {
   background-color: #1ec943;
 }
 
-/* Task list */
+/* ts fot tasklist */
 .task-list {
   list-style: none;
   padding: 0;
@@ -152,8 +152,8 @@ button:disabled {
 }
 
 .status-pending {
-  background: #fff3cd;
-  color: #8a6d3b;
+  background: #fcecb9;
+  color: #b98d41;
 }
 
 .status-done {
@@ -168,16 +168,16 @@ button:disabled {
 }
 
 .complete {
-  background-color: #25eb50;
+  background-color: #28ff45;
   color: white;
 }
 
 .complete:hover {
-  background-color: #1ec943;
+  background-color: #c3ffd0;
 }
 
 .delete {
-  background-color: #f1f1f1;
+  background-color: #ffd6d6;
   color: #c0392b;
 }
 
@@ -185,7 +185,7 @@ button:disabled {
   background-color: #e3e3e3;
 }
 
-/* Messages */
+/* msgs */
 .error {
   color: #c0392b;
   font-weight: bold;
@@ -201,7 +201,7 @@ button:disabled {
   margin-top: 12px;
 }
 
-/* Small screens: stack everything into one column */
+/* ts for the stacking all */
 @media (max-width: 600px) {
   .form-grid,
   .availability-grid {

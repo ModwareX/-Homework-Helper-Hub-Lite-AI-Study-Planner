@@ -150,7 +150,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Bayaan Academy Homework Helper</h1>
+      <h1>BA Homework Helper</h1>
 
       <br />
 
@@ -319,7 +319,7 @@ function App() {
         <p className="hint">
           {pendingCount > 0
             ? `${pendingCount} task(s) to plan. Click below to create your weekly schedule.`
-            : "Add some assignmentsfirst, then click generate to make your plan."}
+            : "Add some assignments first, then click generate to make your plan."}
         </p>
 
         <button
