@@ -150,17 +150,17 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Homework Helper Hub Lite</h1>
+      <h1>Bayaan Academy Homework Helper</h1>
 
       <br />
 
       <p className="subtitle">
-        A simple study planner that helps students organize assignments,
-        quizzes, exams, and projects.
+        A website which lets students create a simple study planner that helps students organize assignments,
+        quizzes, exams, and PBL's.
       </p>
 
       <section className="card">
-        <h2>1. Add a School Task</h2>
+        <h2>1. Add a Assignment</h2>
 
         <div className="form-grid">
           <label>
@@ -175,7 +175,7 @@ function App() {
           <label>
             Task title
             <input
-              placeholder="e.g. Chapter 5 Exam"
+              placeholder="e.g. Unit 4 Quiz"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
@@ -190,7 +190,7 @@ function App() {
               <option>Assignment</option>
               <option>Quiz</option>
               <option>Exam</option>
-              <option>Project</option>
+              <option>PBL</option>
             </select>
           </label>
 
@@ -209,18 +209,20 @@ function App() {
               value={difficulty}
               onChange={(event) => setDifficulty(event.target.value)}
             >
+              <option>Super easy</option>
               <option>Easy</option>
               <option>Medium</option>
               <option>Hard</option>
+              <option>Super Hard</option>
             </select>
           </label>
 
           <label>
-            Estimated study hours
+            Estimated time to complete assignment
             <input
               type="number"
               min="0"
-              placeholder="e.g. 4"
+              placeholder="e.g. 2"
               value={estimatedHours}
               onChange={(event) => setEstimatedHours(event.target.value)}
             />
@@ -230,16 +232,16 @@ function App() {
         {error && <p className="error">{error}</p>}
 
         <button className="primary" onClick={addTask}>
-          Add Task
+          + Add Task
         </button>
       </section>
 
       <section className="card">
-        <h2>2. Your Weekly Availability</h2>
+        <h2>2. Your Time Available</h2>
 
         <p className="hint">
           Enter when you are free to study each day (for example: "6 PM - 8 PM").
-          Leave a day blank if you are not free.
+          Leave the box empty if you are not free on that day.
         </p>
 
         <div className="availability-grid">
@@ -259,7 +261,7 @@ function App() {
       </section>
 
       <section className="card">
-        <h2>3. Your Tasks</h2>
+        <h2>3. Your Assignments</h2>
 
         {tasks.length === 0 ? (
           <p className="hint">No tasks added yet.</p>
@@ -317,7 +319,7 @@ function App() {
         <p className="hint">
           {pendingCount > 0
             ? `${pendingCount} task(s) to plan. Click below to create your weekly schedule.`
-            : "Add some tasks first, then generate your plan."}
+            : "Add some assignmentsfirst, then click generate to make your plan."}
         </p>
 
         <button
@@ -329,7 +331,7 @@ function App() {
         </button>
 
         <pre className="study-plan">
-          {studyPlan || "Your study plan will appear here."}
+          {studyPlan || "Once Generated, your study plan will appear here."}
         </pre>
       </section>
     </div>
