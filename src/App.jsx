@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import "./App.css";
 
 const DAYS = [
@@ -330,9 +331,11 @@ function App() {
           {loading ? "Generating..." : "Generate AI Study Plan"}
         </button>
 
-        <pre className="study-plan">
-          {studyPlan || "Once Generated, your study plan will appear here."}
-        </pre>
+        <div className="study-plan">
+          <ReactMarkdown>
+            {studyPlan || "Your study plan will appear here."}
+          </ReactMarkdown>
+        </div>
       </section>
     </div>
   );
