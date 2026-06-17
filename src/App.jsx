@@ -12,7 +12,30 @@ const DAYS = [
   "Sunday",
 ];
 
+// localStorage keys for study plan persistence
+const STUDY_PLAN_STORAGE_KEY = "studyPlan";
+const STUDY_PLAN_TASKS_KEY = "studyPlanTasksFingerprint";
+
+// Helper function to create a fingerprint of pending tasks
+function getPendingTasksFingerprint(tasks) {
+  const pendingTasks = tasks
+    .filter((task) => task.status !== "Complete")
+    .map((task) => ({
+      id: task.id,
+      course: task.course,
+      title: task.title,
+      type: task.type,
+      dueDate: task.dueDate,
+      difficulty: task.difficulty,
+      estimatedHours: task.estimatedHours,
+      status: task.status,
+    }));
+
+  return JSON.stringify(pendingTasks);
+}
+
 function App() {
+  
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
 
@@ -93,14 +116,31 @@ function App() {
     setEstimatedHours("");
   }
 
-  const [studyPlan, setStudyPlan] = useState("");
+  // Study plan state now loads from localStorage
+  const [studyPlan, setStudyPlan] = useState(() => {
+    return localStorage.getItem(STUDY_PLAN_STORAGE_KEY) || "";
+  });
   const [loading, setLoading] = useState(false);
+
+  // Calculate task fingerprint and check if saved plan matches
+  const pendingTasksFingerprint = getPendingTasksFingerprint(tasks);
+  const savedStudyPlanFingerprint =
+    localStorage.getItem(STUDY_PLAN_TASKS_KEY) || "";
+  const hasSavedPlanForCurrentTasks =
+    Boolean(studyPlan) && savedStudyPlanFingerprint === pendingTasksFingerprint;
 
   async function generateStudyPlan() {
     const pendingTasks = tasks.filter((task) => task.status !== "Complete");
 
     if (pendingTasks.length === 0) {
       setStudyPlan("No pending tasks to plan.");
+      localStorage.removeItem(STUDY_PLAN_STORAGE_KEY);
+      localStorage.removeItem(STUDY_PLAN_TASKS_KEY);
+      return;
+    }
+
+    // Skip generation if we already have a plan for current tasks
+    if (hasSavedPlanForCurrentTasks) {
       return;
     }
 
@@ -117,8 +157,12 @@ function App() {
       });
 
       const data = await response.json();
+      const nextStudyPlan = data.plan || "Could not generate a study plan.";
 
-      setStudyPlan(data.plan || "Could not generate a study plan.");
+      // Save plan and task fingerprint to localStorage
+      setStudyPlan(nextStudyPlan);
+      localStorage.setItem(STUDY_PLAN_STORAGE_KEY, nextStudyPlan);
+      localStorage.setItem(STUDY_PLAN_TASKS_KEY, pendingTasksFingerprint);
     } catch (err) {
       console.error(err);
       setStudyPlan("Something went wrong. Please try again.");
@@ -148,6 +192,8 @@ function App() {
   }
 
   const pendingCount = tasks.filter((task) => task.status !== "Complete").length;
+  const canGenerateStudyPlan =
+    pendingCount > 0 && !loading && !hasSavedPlanForCurrentTasks;
 
   return (
     <div className="app">
@@ -318,17 +364,23 @@ function App() {
         <h2>4. Weekly Study Plan</h2>
 
         <p className="hint">
-          {pendingCount > 0
+          {hasSavedPlanForCurrentTasks
+            ? "This study plan is saved locally. Change your tasks to generate a new one."
+            : pendingCount > 0
             ? `${pendingCount} task(s) to plan. Click below to create your weekly schedule.`
-            : "Add some assignments first, then click generate to make your plan."}
+            : "Add some tasks first, then generate your plan."}
         </p>
 
         <button
           className="primary"
           onClick={generateStudyPlan}
-          disabled={loading}
+          disabled={!canGenerateStudyPlan}
         >
-          {loading ? "Generating..." : "Generate AI Study Plan"}
+          {loading
+            ? "Generating..."
+            : hasSavedPlanForCurrentTasks
+            ? "Study Plan Saved"
+            : "Generate AI Study Plan"}
         </button>
 
         <div className="study-plan">
