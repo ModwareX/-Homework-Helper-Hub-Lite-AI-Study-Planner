@@ -207,7 +207,7 @@ function App() {
       </p>
 
       <section className="card">
-        <h2>1. Add a Assignment</h2>
+        <h2>Add a Assignment</h2>
 
         <div className="form-grid">
           <label>
@@ -265,7 +265,7 @@ function App() {
           </label>
 
           <label>
-            Estimated time to complete assignment
+            Estimated time to complete assignment (hours)
             <input
               type="number"
               min="0"
@@ -284,7 +284,7 @@ function App() {
       </section>
 
       <section className="card">
-        <h2>2. Your Time Available</h2>
+        <h2>Your Time Available</h2>
 
         <p className="hint">
           Enter when you are free to study each day (for example: "6 PM - 8 PM").
@@ -308,7 +308,7 @@ function App() {
       </section>
 
       <section className="card">
-        <h2>3. Your Assignments</h2>
+        <h2>Your Assignments</h2>
 
         {tasks.length === 0 ? (
           <p className="hint">No tasks added yet.</p>
@@ -361,7 +361,7 @@ function App() {
       </section>
 
       <section className="card">
-        <h2>4. Weekly Study Plan</h2>
+        <h2>Weekly Study Plan</h2>
 
         <p className="hint">
           {hasSavedPlanForCurrentTasks

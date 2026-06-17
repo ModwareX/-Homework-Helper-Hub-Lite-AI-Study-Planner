@@ -6,7 +6,7 @@ body {
 }
 
 .app {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 40px auto;
   padding: 20px;
 }
@@ -38,7 +38,7 @@ h1 {
 
 .hint {
   color: #777;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* input area for asgnmnts and thetime avalible thingy */
@@ -53,7 +53,7 @@ label {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: #444;
 }
@@ -63,7 +63,7 @@ select {
   font-family: "Spectral", serif;
   width: 100%;
   padding: 10px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: normal;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -72,14 +72,14 @@ select {
 
 input:focus,
 select:focus {
-  outline: none;
-  border-color: #25eb50;
+  outline: 2px solid #3967ff;
+  border-color: #3967ff;
 }
 
 /* btns when adding */
 button {
   font-family: "Spectral", serif;
-  font-size: 15px;
+  font-size: 18px;
   padding: 10px 16px;
   border: none;
   border-radius: 8px;
@@ -95,13 +95,14 @@ button:disabled {
   display: block;
   width: 100%;
   margin-top: 16px;
-  background-color: #36ff61;/*kinda neon but dont change unless changing all buttons with green*/
+  background-color: #3967ff;/*kinda neon but dont change unless changing all buttons with green org green:#36ff61*/
   color: white;
   font-weight: bold;
 }
 
 .primary:hover:not(:disabled) {
-  background-color: #1ec943;
+  background-color: #3967ffbe;
+  box-shadow: 0 3px 0 #afafaf;
 }
 
 /* ts fot tasklist */
@@ -136,7 +137,7 @@ button:disabled {
   align-items: center;
   gap: 8px;
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 14px;
   color: #555;
 }
 
@@ -169,12 +170,13 @@ button:disabled {
 }
 
 .complete {
-  background-color: #28ff45;
-  color: white;
+  background-color: #bfffc7;
+  color: #00680e;
 }
 
 .complete:hover {
-  background-color: #c3ffd0;
+  background-color: #acffb4;
+  box-shadow: 0 3px 0 #afafaf;
 }
 
 .delete {
@@ -183,7 +185,8 @@ button:disabled {
 }
 
 .delete:hover {
-  background-color: #e3e3e3;
+  background-color: #eec0c0;
+  box-shadow: 0 3px 0 #bdbdbd;
 }
 
 /* msgs */
@@ -228,7 +231,7 @@ button:disabled {
 }
 
 .study-plan h3 {
-  font-size: 15px;
+  font-size: 16px;
   color: #334155;
   margin: 16px 0 6px;
 }
