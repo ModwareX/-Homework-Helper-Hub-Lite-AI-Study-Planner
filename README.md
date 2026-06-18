@@ -10,7 +10,7 @@
 
 Homework Helper Hub Lite is a beginner-friendly study planning web app for students. Students can enter assignments, quizzes, exams, due dates, difficulty levels, and available study time. The app then generates a simple weekly study plan to help students organize their work and avoid last-minute stress.
 
-This project is inspired by the school-provided Homework Helper Hub idea but simplified so it can be completed within the project deadline.
+This project is inspired by the school-provided Homework Helper Hub idea.
 
 ---
 
